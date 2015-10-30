@@ -17,29 +17,40 @@ typedef struct _Present
 
 typedef struct _Request
 {
-  char date[8];
+  char date[max];
   char name[max];
   char city[max];
   char address[max];
-  struct Present* present;
+  char present[max];
 } Request;
 
-char* inputFromConsole(char*,char*);
+ char* inputFromConsole(char*,char*);
+ char* selectPresent(int,char*);
 
 int main()
 {
-	Request r;
 	
-	printf("%s\t%s\t%s\t%s\t%s\t%s",p.baby,p.car,p.ball,p.puzzle,p.colorB,p.book);
+	//const Present p = {"baba", "auto", "labda", "kirako", "szinezo", "konyv"};
+	//printf("present: %s ", presents[0]);
+	Request r = (Request){"19941212", "Katona", "Rum", "trelll", "konyv" };
+
+	printf("\nr.present: %s", r.present);
+
+	char* str;
+	printf("\nselectPresent: %s", selectPresent(2,str));
+	
+		/*
+
+	//printf("%s\t%s\t%s\t%s\t%s\t%s",p.baby,p.car,p.ball,p.puzzle,p.colorB,p.book);
 	printf("\n-------------------");
 	printf("\nbeker stdi");
 	char out[max];
-	inputFromConsole("\nAdja meg az out-t",out);
+	inputFromConsole("\nAdja meg az out-t",out);*/
 
 	return 0;
 }
 
-char* inputFromConsole(char* msg, char* str)
+ char* inputFromConsole(char* msg, char* str)
 {
 	//char str[80];
   int i;
@@ -53,6 +64,35 @@ char* inputFromConsole(char* msg, char* str)
       str[i] = '\0';
 
   printf("\nThis is your string: %s", str);
+	return str;
+}
+
+//char* presents[]  = {"baba", "auto", "labda", "kirako", "szinezo", "konyv"};
+char* selectPresent(int which, char* str)
+{
+	int bool = 100;
+	char* in;
+	while(bool)
+	{
+		//printf("Nem jo ajandek! Valassz 1-6 opciok kozul:");
+		which = atoi(inputFromConsole("\nValassz 1-6 opciok kozul:", in));
+		if(which == 1) str = "baba";
+		if(which == 2) str = "auto";
+		if(which == 3) str = "labda";
+		if(which == 4) str = "kirako";
+		if(which == 5) str = "szinezo";
+		if(which == 6) str = "konyv";
+
+		if( (which > 6 || which < 1) ) 
+		{
+			printf("\nNem jo ajandek!");
+		} 
+		else
+		{
+			bool = 0;
+		}
+
+	}
 	return str;
 }
 
@@ -84,7 +124,7 @@ char* inputFromConsole(char* msg, char* str)
 *	- address, format: char* (Petofi_Sandor_Street_46)
 *	- present, format: Present struct{...}
 *
-*	enum Present; 
+*	struct Present; 
 *	- baby
 *	- car
 *	- ball
